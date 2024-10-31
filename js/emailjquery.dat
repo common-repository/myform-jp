@@ -1,0 +1,7 @@
+<script type="text/javascript">
+jQuery(function($){
+  $("#[######]").emailautocomplete({
+    domains: ["pierre-soft.com", "yahoo.co.jp"]
+  });
+});
+</script>

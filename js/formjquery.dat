@@ -1,0 +1,5 @@
+<script type="text/javascript">
+jQuery(function($){
+  $("#[yympicker]").click(function(){Yym.entry($(this).val(), $(this).attr('id'));});
+});
+</script>

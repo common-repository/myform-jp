@@ -1,0 +1,14 @@
+/*
+ *	■自動でフリガナ（ふりがな）をセットします。( autoruby2.js Ver1.4 )
+ *
+ *	The use is free of charge. / ご利用は無料です。
+ *	@demo    http://validate-js.com/
+ *	@link    http://www.pierre-soft.com/
+ *	@author  Tatsuro, Terunuma <info@pierre-soft.com>
+ */
+function Rub(){
+this.ver= "1.4";
+this.base= new Array();
+this.zen= "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォガギグゲゴザジズゼゾダヂッヅデドバパビピブプベペボポャュョヮヰヱヴヵヶー　";
+} var RB= new Rub;
+Rub.entry=function(){var focusid=document.activeElement.id;var evt1='mouseover';var evt2='mouseout';for(var i=0;i<MY.kanatb.length;i++){var pm=MY.kanatb[i].split("｜");if(i>3)alert("kanatb max 4");else if(document.getElementById(pm[0])&&document.getElementById(pm[1])){var obj=document.getElementById(pm[0]);if(pm[0]==focusid)Rub.Timerset(i);if(i==0){Rub.aEv(obj,evt1,Rub.ev0);Rub.aEv(obj,evt2,Rub.ex0)}else if(i==1){Rub.aEv(obj,evt1,Rub.ev1);Rub.aEv(obj,evt2,Rub.ex1)}else if(i==2){Rub.aEv(obj,evt1,Rub.ev2);Rub.aEv(obj,evt2,Rub.ex2)}else if(i==3){Rub.aEv(obj,evt1,Rub.ev3);Rub.aEv(obj,evt2,Rub.ex3)}}}};Rub.ev0=function(){Rub.Timerset(0)};Rub.ev1=function(){Rub.Timerset(1)};Rub.ev2=function(){Rub.Timerset(2)};Rub.ev3=function(){Rub.Timerset(3)};Rub.ex0=function(){Rub.Timeroff(0)};Rub.ex1=function(){Rub.Timeroff(1)};Rub.ex2=function(){Rub.Timeroff(2)};Rub.ex3=function(){Rub.Timeroff(3)};Rub.setruby=function(no){var pm=MY.kanatb[no].split("｜");var id=pm[0];var idk=pm[1];var kana=pm[2];if(document.getElementById(id)){var baseVal=RB.base[no]==null?"":RB.base[no];var d1=document.getElementById(id).value;var d2=document.getElementById(idk).value;if(d1==""){RB.base[no]="";return document.getElementById(idk).value=""}if(d1==baseVal)return;RB.base[no]=d1;var ans="";for(var i=baseVal.length;i>=0;i--){if(d1.substr(0,i)==baseVal.substr(0,i)){ans=d1.substr(i);break}}if(ans=="")return;ans=Rub.conv_kana(ans);if(Rub.zkana_check(ans))return;if(kana==0){ans=ans.replace(/[ァ-ン]/g,function(s){return String.fromCharCode(s.charCodeAt(0)-0x60)})}document.getElementById(idk).value=d2+ans}};Rub.conv_kana=function(da){var c,a=[];for(var i=da.length-1;0<=i;i--){c=da.charCodeAt(i);a[i]=(0x3041<=c&&c<=0x3096)?c+0x0060:c}return String.fromCharCode.apply(null,a)};Rub.zkana_check=function(da){var ans=false;for(var i=0;i<da.length;i++){var tmp1=da.substr(i,1);var wk="";for(var j=0;j<RB.zen.length;j++){var tmp2=RB.zen.substr(j,1);if(tmp1==tmp2){wk="1";break}}if(wk!="1"){ans=true;break}}return ans};Rub.Timerset=function(no){timer=setInterval("Rub.setruby("+no+")",30)};Rub.Timeroff=function(no){clearInterval(timer)};Rub.aEv=function(obj,type,mod){if(obj.addEventListener){obj.addEventListener(type,mod,false)}else if(obj.attachEvent){obj.attachEvent('on'+type,mod)}};
